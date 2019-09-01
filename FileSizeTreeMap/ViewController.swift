@@ -10,6 +10,7 @@ import Cocoa
 
 class ViewController: NSViewController {
 
+    @IBOutlet weak var TreeMapContainer: NSBox!
     override func viewDidLoad() {
         super.viewDidLoad()
 
