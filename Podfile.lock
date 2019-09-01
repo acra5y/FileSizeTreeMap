@@ -1,0 +1,16 @@
+PODS:
+  - YMTreeMap (1.2.0)
+
+DEPENDENCIES:
+  - YMTreeMap
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - YMTreeMap
+
+SPEC CHECKSUMS:
+  YMTreeMap: 8bd766573bc5005cf6b6f5d2674e4225ee734f6e
+
+PODFILE CHECKSUM: 6622ea648cc1e27583ecda89293a45765d09db32
+
+COCOAPODS: 1.7.5
