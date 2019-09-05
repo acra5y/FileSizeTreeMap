@@ -705,30 +705,14 @@
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="FileSizeTreeMap" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <box ambiguous="YES" boxType="custom" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="aHc-Wv-BLE">
-                                <rect key="frame" x="20" y="20" width="440" height="230"/>
-                                <view key="contentView" ambiguous="YES" id="pre-rF-OGQ">
-                                    <rect key="frame" x="1" y="1" width="438" height="228"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                            </box>
-                        </subviews>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="aHc-Wv-BLE" secondAttribute="trailing" constant="20" id="HOy-tC-L5P"/>
-                            <constraint firstItem="aHc-Wv-BLE" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="RMw-PT-6Bz"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="TreeMapContainer" destination="aHc-Wv-BLE" id="hnc-vk-vTI"/>
-                    </connections>
+                    <customView key="view" id="lAS-eA-dzL" customClass="TreeMapView" customModule="FileSizeTreeMap" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="465" height="300"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    </customView>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="82.5" y="655"/>
         </scene>
     </scenes>
 </document>
