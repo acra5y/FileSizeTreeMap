@@ -707,7 +707,7 @@
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="FileSizeTreeMap" customModuleProvider="target" sceneMemberID="viewController">
                     <customView key="view" id="lAS-eA-dzL" customClass="TreeMapView" customModule="FileSizeTreeMap" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="465" height="300"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     </customView>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
