@@ -26,14 +26,16 @@ class TreeMapView: NSView {
         }
     }
 
-    func getItems() -> [[FileAttributeKey : Any]] {
+    func getItems() -> [String : [FileAttributeKey : Any]] {
         let urls: [URL] = FileManager.default.urls(for: .picturesDirectory, in: .userDomainMask)
         do {
             let contents: [String] = try FileManager.default.contentsOfDirectory(atPath: urls[0].path)
-            return contents.map({ getItem(pathToItem: "\(urls[0].path)/\($0)") })
+            return contents.reduce(into: [String: [FileAttributeKey : Any]]()) {
+                $0[$1] = getItem(pathToItem: "\(urls[0].path)/\($1)")
+            }
         } catch {
             print("Boom \(error)")
-            return []
+            return [:]
         }
     }
 
@@ -41,15 +43,19 @@ class TreeMapView: NSView {
         let items = getItems()
         super.draw(dirtyRect)
 
-        let values = items.map({ $0[FileAttributeKey.size]! as! Double }).sorted()
+        let names = items.map({ key, _ in key })
+        let values = items.map({ key, value in value[FileAttributeKey.size]! as! Double })
 
         // These two lines are actual YMTreeMap usage!
         let treeMap = YMTreeMap(withValues: values)
-        let treeMapRects = treeMap.tessellate(inRect: dirtyRect)
+        let treeMapRects: [NSRect] = treeMap.tessellate(inRect: dirtyRect)
 
-        treeMapRects.forEach { (treeMapRect) in
+        for (index, treeMapRect) in treeMapRects.enumerated() {
             randomColor.setFill()
             treeMapRect.fill()
+            let label: NSString = names[index] as NSString
+
+            label.draw(in: treeMapRect)
         }
     }
 
