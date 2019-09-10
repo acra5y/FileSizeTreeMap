@@ -17,10 +17,31 @@ class TreeMapView: NSView {
                    alpha: 1)
     }
 
+    func getItem(pathToItem: String) -> [FileAttributeKey : Any] {
+        do {
+            return try FileManager.default.attributesOfItem(atPath: pathToItem)
+        } catch {
+            print("Boom \(error)")
+            return [:]
+        }
+    }
+
+    func getItems() -> [[FileAttributeKey : Any]] {
+        let urls: [URL] = FileManager.default.urls(for: .picturesDirectory, in: .userDomainMask)
+        do {
+            let contents: [String] = try FileManager.default.contentsOfDirectory(atPath: urls[0].path)
+            return contents.map({ getItem(pathToItem: "\(urls[0].path)/\($0)") })
+        } catch {
+            print("Boom \(error)")
+            return []
+        }
+    }
+
     override func draw(_ dirtyRect: NSRect) {
+        let items = getItems()
         super.draw(dirtyRect)
 
-        let values = [ 445, 203, 110, 105, 95, 65, 33, 21, 10 ].sorted()
+        let values = items.map({ $0[FileAttributeKey.size]! as! Double }).sorted()
 
         // These two lines are actual YMTreeMap usage!
         let treeMap = YMTreeMap(withValues: values)
