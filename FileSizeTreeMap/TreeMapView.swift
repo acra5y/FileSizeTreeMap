@@ -46,7 +46,6 @@ class TreeMapView: NSView {
         let names = items.map({ key, _ in key })
         let values = items.map({ key, value in value[FileAttributeKey.size]! as! Double })
 
-        // These two lines are actual YMTreeMap usage!
         let treeMap = YMTreeMap(withValues: values)
         let treeMapRects: [NSRect] = treeMap.tessellate(inRect: dirtyRect)
 
