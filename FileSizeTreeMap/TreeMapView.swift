@@ -52,7 +52,7 @@ class TreeMapView: NSView {
         for (index, treeMapRect) in treeMapRects.enumerated() {
             randomColor.setFill()
             treeMapRect.fill()
-            let label: NSString = names[index] as NSString
+            let label: NSAttributedString =  NSAttributedString(string: names[index], attributes: [.foregroundColor: NSColor.white, .strokeColor: NSColor.black, .strokeWidth:  -3.0])
 
             label.draw(in: treeMapRect)
         }
