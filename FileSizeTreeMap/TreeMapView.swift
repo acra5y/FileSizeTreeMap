@@ -10,13 +10,6 @@ import Cocoa
 import YMTreeMap
 
 class TreeMapView: NSView {
-    var randomColor: NSColor {
-        return NSColor(red: CGFloat(arc4random_uniform(255) % 255) / 255.0,
-                   green: CGFloat(arc4random_uniform(255) % 255) / 255.0,
-                   blue: CGFloat(arc4random_uniform(255) % 255) / 255.0,
-                   alpha: 1)
-    }
-
     func getItem(pathToItem: String) -> [FileAttributeKey : Any] {
         do {
             return try FileManager.default.attributesOfItem(atPath: pathToItem)
@@ -50,11 +43,9 @@ class TreeMapView: NSView {
         let treeMapRects: [NSRect] = treeMap.tessellate(inRect: dirtyRect)
 
         for (index, treeMapRect) in treeMapRects.enumerated() {
-            randomColor.setFill()
-            treeMapRect.fill()
-            let label: NSAttributedString =  NSAttributedString(string: names[index], attributes: [.foregroundColor: NSColor.white, .strokeColor: NSColor.black, .strokeWidth:  -3.0])
-
-            label.draw(in: treeMapRect)
+            let item = ItemView()
+            item.name = names[index]
+            item.draw(treeMapRect)
         }
     }
 }

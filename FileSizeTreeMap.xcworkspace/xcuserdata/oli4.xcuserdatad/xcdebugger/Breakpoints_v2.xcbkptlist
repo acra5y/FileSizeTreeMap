@@ -6,15 +6,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FileSizeTreeMap/TreeMapView.swift"
-            timestampString = "589838734.076667"
+            timestampString = "591045068.058028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64">
+            startingLineNumber = "59"
+            endingLineNumber = "59">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -24,11 +24,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FileSizeTreeMap/TreeMapView.swift"
-            timestampString = "589838734.077183"
+            timestampString = "591045068.058277"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64">
+            startingLineNumber = "59"
+            endingLineNumber = "59">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -38,11 +38,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FileSizeTreeMap/TreeMapView.swift"
-            timestampString = "589838734.07741"
+            timestampString = "591045068.058452"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64">
+            startingLineNumber = "59"
+            endingLineNumber = "59">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -52,61 +52,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FileSizeTreeMap/TreeMapView.swift"
-            timestampString = "589838734.0776221"
+            timestampString = "591045068.058624"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
-            landmarkName = "getItems()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FileSizeTreeMap/TreeMapView.swift"
-            timestampString = "589838734.077849"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
             landmarkName = "draw(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FileSizeTreeMap.TreeMapView.draw(__C.CGRect) -&gt; ()"
-                  moduleName = "FileSizeTreeMap"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/oli4/projects/FileSizeTreeMap/FileSizeTreeMap/TreeMapView.swift"
-                  timestampString = "589838734.490115"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "48"
-                  endingLineNumber = "48"
-                  offsetFromSymbolStart = "646">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.String, Swift.Dictionary&lt;__C.NSFileAttributeKey, Any&gt;) -&gt; Swift.Double in FileSizeTreeMap.TreeMapView.draw(__C.CGRect) -&gt; ()"
-                  moduleName = "FileSizeTreeMap"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/oli4/projects/FileSizeTreeMap/FileSizeTreeMap/TreeMapView.swift"
-                  timestampString = "589838734.491414"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "48"
-                  endingLineNumber = "48"
-                  offsetFromSymbolStart = "136">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
