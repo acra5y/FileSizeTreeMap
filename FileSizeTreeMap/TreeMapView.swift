@@ -57,5 +57,4 @@ class TreeMapView: NSView {
             label.draw(in: treeMapRect)
         }
     }
-
 }
