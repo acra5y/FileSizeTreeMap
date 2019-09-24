@@ -10,6 +10,20 @@ import Cocoa
 import YMTreeMap
 
 class TreeMapView: NSView {
+    private var tiles: [ItemView] = []
+
+    override func mouseUp(with event: NSEvent) {
+        if (event.clickCount == 1) {
+            let clickedTile = self.tiles.first(where:{ $0.frame.contains(event.locationInWindow) })
+
+            if (clickedTile != nil) {
+                print(clickedTile!.name)
+            } else {
+                print("I don't know where that click went")
+            }
+        }
+    }
+
     func getItem(pathToItem: String) -> [FileAttributeKey : Any] {
         do {
             return try FileManager.default.attributesOfItem(atPath: pathToItem)
@@ -42,10 +56,14 @@ class TreeMapView: NSView {
         let treeMap = YMTreeMap(withValues: values)
         let treeMapRects: [NSRect] = treeMap.tessellate(inRect: dirtyRect)
 
+        var tiles: [ItemView] = []
+
         for (index, treeMapRect) in treeMapRects.enumerated() {
             let item = ItemView(frame: treeMapRect)
             item.name = names[index]
             item.draw(treeMapRect)
+            tiles.append(item)
+            self.tiles = tiles
         }
     }
 }
