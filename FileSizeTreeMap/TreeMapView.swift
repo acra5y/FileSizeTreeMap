@@ -43,7 +43,7 @@ class TreeMapView: NSView {
         let treeMapRects: [NSRect] = treeMap.tessellate(inRect: dirtyRect)
 
         for (index, treeMapRect) in treeMapRects.enumerated() {
-            let item = ItemView()
+            let item = ItemView(frame: treeMapRect)
             item.name = names[index]
             item.draw(treeMapRect)
         }
