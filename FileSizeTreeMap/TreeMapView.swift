@@ -47,7 +47,7 @@ class TreeMapView: NSView {
     }
 
     override func draw(_ dirtyRect: NSRect) {
-        let items = getItems()
+        let items = getItems().filter({ _, value in return value[FileAttributeKey.size]! as! Double > 0 })
         super.draw(dirtyRect)
 
         let names = items.map({ key, _ in key })
