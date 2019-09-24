@@ -11,6 +11,7 @@ import YMTreeMap
 
 class TreeMapView: NSView {
     private var tiles: [ItemView] = []
+    lazy private var directoryBrowser: DirectoryBrowser = DirectoryBrowser()
 
     override func mouseUp(with event: NSEvent) {
         if (event.clickCount == 1) {
@@ -24,30 +25,8 @@ class TreeMapView: NSView {
         }
     }
 
-    func getItem(pathToItem: String) -> [FileAttributeKey : Any] {
-        do {
-            return try FileManager.default.attributesOfItem(atPath: pathToItem)
-        } catch {
-            print("Boom \(error)")
-            return [:]
-        }
-    }
-
-    func getItems() -> [String : [FileAttributeKey : Any]] {
-        let urls: [URL] = FileManager.default.urls(for: .picturesDirectory, in: .userDomainMask)
-        do {
-            let contents: [String] = try FileManager.default.contentsOfDirectory(atPath: urls[0].path)
-            return contents.reduce(into: [String: [FileAttributeKey : Any]]()) {
-                $0[$1] = getItem(pathToItem: "\(urls[0].path)/\($1)")
-            }
-        } catch {
-            print("Boom \(error)")
-            return [:]
-        }
-    }
-
     override func draw(_ dirtyRect: NSRect) {
-        let items = getItems().filter({ _, value in return value[FileAttributeKey.size]! as! Double > 0 })
+        let items = self.directoryBrowser.getItems(pathToBrowse: .picturesDirectory).filter({ _, value in return value[FileAttributeKey.size]! as! Double > 0 })
         super.draw(dirtyRect)
 
         let names = items.map({ key, _ in key })
