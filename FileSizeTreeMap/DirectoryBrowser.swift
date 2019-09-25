@@ -9,7 +9,7 @@
 import Foundation
 
 class DirectoryBrowser {
-    func getItem(pathToItem: String) -> [FileAttributeKey : Any] {
+    private func getItem(pathToItem: String) -> [FileAttributeKey : Any] {
         do {
             return try FileManager.default.attributesOfItem(atPath: pathToItem)
         } catch {
