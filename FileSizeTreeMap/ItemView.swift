@@ -10,6 +10,7 @@ import Cocoa
 
 class ItemView: NSView {
     lazy var name: String = ""
+    lazy var file: [FileAttributeKey: Any] = [:]
 
     var randomColor: NSColor {
         return NSColor(red: CGFloat(arc4random_uniform(255) % 255) / 255.0,

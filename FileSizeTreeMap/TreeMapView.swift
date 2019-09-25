@@ -11,6 +11,7 @@ import YMTreeMap
 
 class TreeMapView: NSView {
     private var tiles: [ItemView] = []
+    lazy private var currentPath: String = NSSearchPathForDirectoriesInDomains(.picturesDirectory, .userDomainMask, true).first!
     lazy private var directoryBrowser: DirectoryBrowser = DirectoryBrowser()
 
     override func mouseUp(with event: NSEvent) {
@@ -18,7 +19,12 @@ class TreeMapView: NSView {
             let clickedTile = self.tiles.first(where:{ $0.frame.contains(event.locationInWindow) })
 
             if (clickedTile != nil) {
-                print(clickedTile!.name)
+                let newPathCandidate: String = "\(self.currentPath)/\(clickedTile!.name)"
+
+                if (self.directoryBrowser.isDirectory(pathToCheck:  newPathCandidate)) {
+                    self.currentPath = newPathCandidate
+                    self.setNeedsDisplay(self.bounds)
+                }
             } else {
                 print("I don't know where that click went")
             }
@@ -26,7 +32,9 @@ class TreeMapView: NSView {
     }
 
     override func draw(_ dirtyRect: NSRect) {
-        let items = self.directoryBrowser.getItems(pathToBrowse: .picturesDirectory).filter({ _, value in return value[FileAttributeKey.size]! as! Double > 0 })
+        let items = self.directoryBrowser
+            .getItems(pathToBrowse: self.currentPath)
+            .filter({ _, value in return value[FileAttributeKey.size]! as! Double > 0 })
         super.draw(dirtyRect)
 
         let names = items.map({ key, _ in key })
@@ -39,7 +47,9 @@ class TreeMapView: NSView {
 
         for (index, treeMapRect) in treeMapRects.enumerated() {
             let item = ItemView(frame: treeMapRect)
-            item.name = names[index]
+            let itemName = names[index]
+            item.name = itemName
+            item.file = items[itemName]!
             item.draw(treeMapRect)
             tiles.append(item)
             self.tiles = tiles

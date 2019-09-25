@@ -18,16 +18,22 @@ class DirectoryBrowser {
         }
     }
 
-    func getItems(pathToBrowse aPath: FileManager.SearchPathDirectory) -> [String : [FileAttributeKey : Any]] {
-        let urls: [URL] = FileManager.default.urls(for: aPath, in: .userDomainMask)
+    func getItems(pathToBrowse aPath: String) -> [String : [FileAttributeKey : Any]] {
         do {
-            let contents: [String] = try FileManager.default.contentsOfDirectory(atPath: urls[0].path)
+            let contents: [String] = try FileManager.default.contentsOfDirectory(atPath: aPath)
             return contents.reduce(into: [String: [FileAttributeKey : Any]]()) {
-                $0[$1] = getItem(pathToItem: "\(urls[0].path)/\($1)")
+                $0[$1] = getItem(pathToItem: "\(aPath)/\($1)")
             }
         } catch {
             print("Boom \(error)")
             return [:]
         }
+    }
+
+    func isDirectory(pathToCheck aPath: String) -> Bool {
+        var isDirectory: ObjCBool = false
+
+        FileManager.default.fileExists(atPath: aPath, isDirectory: &isDirectory)
+        return isDirectory.boolValue
     }
 }
