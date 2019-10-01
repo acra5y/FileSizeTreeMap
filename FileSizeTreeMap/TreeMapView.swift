@@ -17,6 +17,10 @@ class TreeMapView: NSView {
     lazy private var currentPath: String = NSSearchPathForDirectoriesInDomains(.picturesDirectory, .userDomainMask, true).first!
     lazy private var directoryBrowser: DirectoryBrowser = DirectoryBrowser()
 
+    private func getTreeMapBounds(outerRect: NSRect) -> NSRect {
+        return NSMakeRect(outerRect.minX, outerRect.minY - self.currentPathTextfield.bounds.minY, outerRect.width, outerRect.height - self.currentPathTextfield.bounds.height)
+    }
+
     private func updateCurrentPath(newPath: String) {
         if (self.directoryBrowser.isDirectory(pathToCheck:  newPath)) {
             self.currentPath = newPath
@@ -51,7 +55,7 @@ class TreeMapView: NSView {
         let values = items.map({ key, value in value[FileAttributeKey.size]! as! Double })
 
         let treeMap = YMTreeMap(withValues: values)
-        let treeMapRects: [NSRect] = treeMap.tessellate(inRect: dirtyRect)
+        let treeMapRects: [NSRect] = treeMap.tessellate(inRect: self.getTreeMapBounds(outerRect: dirtyRect))
 
         var tiles: [ItemView] = []
 
