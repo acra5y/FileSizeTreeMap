@@ -17,17 +17,23 @@ class TreeMapView: NSView {
     lazy private var currentPath: String = NSSearchPathForDirectoriesInDomains(.picturesDirectory, .userDomainMask, true).first!
     lazy private var directoryBrowser: DirectoryBrowser = DirectoryBrowser()
 
+    private func updateCurrentPath(newPath: String) {
+        if (self.directoryBrowser.isDirectory(pathToCheck:  newPath)) {
+            self.currentPath = newPath
+            self.setNeedsDisplay(self.bounds)
+        }
+    }
+
+    @IBAction func textFieldEdited(_ sender: NSTextField) {
+        self.updateCurrentPath(newPath: sender.stringValue)
+    }
+
     override func mouseUp(with event: NSEvent) {
         if (event.clickCount == 1) {
             let clickedTile = self.tiles.first(where:{ $0.frame.contains(event.locationInWindow) })
 
             if (clickedTile != nil) {
-                let newPathCandidate: String = "\(self.currentPath)/\(clickedTile!.name)"
-
-                if (self.directoryBrowser.isDirectory(pathToCheck:  newPathCandidate)) {
-                    self.currentPath = newPathCandidate
-                    self.setNeedsDisplay(self.bounds)
-                }
+                self.updateCurrentPath(newPath: "\(self.currentPath)/\(clickedTile!.name)")
             } else {
                 print("I don't know where that click went")
             }
