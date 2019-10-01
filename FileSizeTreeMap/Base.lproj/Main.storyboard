@@ -708,6 +708,21 @@
                     <customView key="view" id="lAS-eA-dzL" customClass="TreeMapView" customModule="FileSizeTreeMap" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="465" height="300"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sCQ-Vw-i0t">
+                                <rect key="frame" x="0.0" y="278" width="465" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" bezelStyle="round" id="YoO-mn-KOk">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="sCQ-Vw-i0t" firstAttribute="top" secondItem="lAS-eA-dzL" secondAttribute="top" id="7OE-RC-mtB"/>
+                            <constraint firstAttribute="trailing" secondItem="sCQ-Vw-i0t" secondAttribute="trailing" id="bXT-CS-rL6"/>
+                            <constraint firstItem="sCQ-Vw-i0t" firstAttribute="leading" secondItem="lAS-eA-dzL" secondAttribute="leading" id="l6b-7S-eN0"/>
+                        </constraints>
                     </customView>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
