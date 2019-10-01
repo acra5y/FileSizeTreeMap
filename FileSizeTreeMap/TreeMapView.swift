@@ -10,6 +10,9 @@ import Cocoa
 import YMTreeMap
 
 class TreeMapView: NSView {
+
+    @IBOutlet weak var currentPathTextfield: NSTextField!
+
     private var tiles: [ItemView] = []
     lazy private var currentPath: String = NSSearchPathForDirectoriesInDomains(.picturesDirectory, .userDomainMask, true).first!
     lazy private var directoryBrowser: DirectoryBrowser = DirectoryBrowser()
@@ -32,6 +35,7 @@ class TreeMapView: NSView {
     }
 
     override func draw(_ dirtyRect: NSRect) {
+        self.currentPathTextfield.stringValue = self.currentPath
         let items = self.directoryBrowser
             .getItems(pathToBrowse: self.currentPath)
             .filter({ _, value in return value[FileAttributeKey.size]! as! Double > 0 })

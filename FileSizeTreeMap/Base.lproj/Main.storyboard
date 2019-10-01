@@ -723,6 +723,9 @@
                             <constraint firstAttribute="trailing" secondItem="sCQ-Vw-i0t" secondAttribute="trailing" id="bXT-CS-rL6"/>
                             <constraint firstItem="sCQ-Vw-i0t" firstAttribute="leading" secondItem="lAS-eA-dzL" secondAttribute="leading" id="l6b-7S-eN0"/>
                         </constraints>
+                        <connections>
+                            <outlet property="currentPathTextfield" destination="sCQ-Vw-i0t" id="6Vo-sz-xz5"/>
+                        </connections>
                     </customView>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
