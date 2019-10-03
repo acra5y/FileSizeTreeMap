@@ -77,6 +77,9 @@ class TreeMapView: NSView {
             return
         }
 
-        self.drawItems(bounds: rectBelowTextField, items: items.filter({ _, value in return value[FileAttributeKey.size]! as! Double > 0 }))
+        self.drawItems(
+            bounds: rectBelowTextField,
+            items: items.filter({ _, value in return value[FileAttributeKey.size] != nil && value[FileAttributeKey.size]! as! Double > 0 })
+        )
     }
 }
