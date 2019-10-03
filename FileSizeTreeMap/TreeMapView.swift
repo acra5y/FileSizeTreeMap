@@ -22,10 +22,8 @@ class TreeMapView: NSView {
     }
 
     private func updateCurrentPath(newPath: String) {
-        if (self.directoryBrowser.isDirectory(pathToCheck:  newPath)) {
-            self.currentPath = newPath
-            self.setNeedsDisplay(self.bounds)
-        }
+        self.currentPath = newPath
+        self.setNeedsDisplay(self.bounds)
     }
 
     @IBAction func textFieldEdited(_ sender: NSTextField) {

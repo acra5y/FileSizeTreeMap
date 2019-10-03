@@ -19,6 +19,11 @@ class DirectoryBrowser {
     }
 
     func getItems(pathToBrowse aPath: String) -> (Bool, [String : [FileAttributeKey : Any]]) {
+        if (!self.isDirectory(pathToCheck:  aPath)) {
+            print("given path \(aPath) is not a directory.")
+            return (false, [:])
+        }
+
         do {
             let contents: [String] = try FileManager.default.contentsOfDirectory(atPath: aPath)
             return (
@@ -33,7 +38,7 @@ class DirectoryBrowser {
         }
     }
 
-    func isDirectory(pathToCheck aPath: String) -> Bool {
+    private func isDirectory(pathToCheck aPath: String) -> Bool {
         var isDirectory: ObjCBool = false
 
         FileManager.default.fileExists(atPath: aPath, isDirectory: &isDirectory)

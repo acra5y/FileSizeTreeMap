@@ -9,7 +9,7 @@
 import Cocoa
 
 class ErrorMessageView: NSView {
-    lazy var message: String = "Could not read directory"
+    lazy var message: String = "Could not read directory. Please make sure it exists and you have rights to access it."
 
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
