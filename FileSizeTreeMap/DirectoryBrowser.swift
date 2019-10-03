@@ -38,7 +38,7 @@ class DirectoryBrowser {
         }
     }
 
-    private func isDirectory(pathToCheck aPath: String) -> Bool {
+    func isDirectory(pathToCheck aPath: String) -> Bool {
         var isDirectory: ObjCBool = false
 
         FileManager.default.fileExists(atPath: aPath, isDirectory: &isDirectory)

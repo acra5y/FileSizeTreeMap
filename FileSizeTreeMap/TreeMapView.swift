@@ -35,32 +35,22 @@ class TreeMapView: NSView {
             let clickedTile = self.tiles.first(where:{ $0.frame.contains(event.locationInWindow) })
 
             if (clickedTile != nil) {
-                self.updateCurrentPath(newPath: "\(self.currentPath)/\(clickedTile!.name)")
+                let newPath = "\(self.currentPath)/\(clickedTile!.name)"
+                if (self.directoryBrowser.isDirectory(pathToCheck: newPath)) {
+                    self.updateCurrentPath(newPath: "\(self.currentPath)/\(clickedTile!.name)")
+                }
             } else {
                 print("I don't know where that click went")
             }
         }
     }
 
-    override func draw(_ dirtyRect: NSRect) {
-        super.draw(dirtyRect)
-        self.currentPathTextfield.stringValue = self.currentPath
-        let (ok, allItems) = self.directoryBrowser.getItems(pathToBrowse: self.currentPath)
-        let rectBelowTextField = self.getRectBelowTextField(outerRect: dirtyRect)
-
-        if (!ok) {
-            let errorMessage = ErrorMessageView()
-            errorMessage.draw(rectBelowTextField)
-            return
-        }
-
-        var items = allItems.filter({ _, value in return value[FileAttributeKey.size]! as! Double > 0 })
-
+    private func drawItems(bounds: NSRect, items: [String : [FileAttributeKey : Any]]) {
         let names = items.map({ key, _ in key })
         let values = items.map({ key, value in value[FileAttributeKey.size]! as! Double })
 
         let treeMap = YMTreeMap(withValues: values)
-        let treeMapRects: [NSRect] = treeMap.tessellate(inRect: rectBelowTextField)
+        let treeMapRects: [NSRect] = treeMap.tessellate(inRect: bounds)
 
         var tiles: [ItemView] = []
 
@@ -73,5 +63,20 @@ class TreeMapView: NSView {
             tiles.append(item)
             self.tiles = tiles
         }
+    }
+
+    override func draw(_ dirtyRect: NSRect) {
+        super.draw(dirtyRect)
+        self.currentPathTextfield.stringValue = self.currentPath
+        let (ok, items) = self.directoryBrowser.getItems(pathToBrowse: self.currentPath)
+        let rectBelowTextField = self.getRectBelowTextField(outerRect: dirtyRect)
+
+        if (!ok) {
+            let errorMessage = ErrorMessageView()
+            errorMessage.draw(rectBelowTextField)
+            return
+        }
+
+        self.drawItems(bounds: rectBelowTextField, items: items.filter({ _, value in return value[FileAttributeKey.size]! as! Double > 0 }))
     }
 }
