@@ -17,7 +17,7 @@ class TreeMapView: NSView {
     lazy private var currentPath: String = NSSearchPathForDirectoriesInDomains(.picturesDirectory, .userDomainMask, true).first!
     lazy private var directoryBrowser: DirectoryBrowser = DirectoryBrowser()
 
-    private func getTreeMapBounds(outerRect: NSRect) -> NSRect {
+    private func getRectBelowTextField(outerRect: NSRect) -> NSRect {
         return NSMakeRect(outerRect.minX, outerRect.minY - self.currentPathTextfield.bounds.minY, outerRect.width, outerRect.height - self.currentPathTextfield.bounds.height)
     }
 
@@ -45,17 +45,24 @@ class TreeMapView: NSView {
     }
 
     override func draw(_ dirtyRect: NSRect) {
-        self.currentPathTextfield.stringValue = self.currentPath
-        let items = self.directoryBrowser
-            .getItems(pathToBrowse: self.currentPath)
-            .filter({ _, value in return value[FileAttributeKey.size]! as! Double > 0 })
         super.draw(dirtyRect)
+        self.currentPathTextfield.stringValue = self.currentPath
+        let (ok, allItems) = self.directoryBrowser.getItems(pathToBrowse: self.currentPath)
+        let rectBelowTextField = self.getRectBelowTextField(outerRect: dirtyRect)
+
+        if (!ok) {
+            let errorMessage = ErrorMessageView()
+            errorMessage.draw(rectBelowTextField)
+            return
+        }
+
+        var items = allItems.filter({ _, value in return value[FileAttributeKey.size]! as! Double > 0 })
 
         let names = items.map({ key, _ in key })
         let values = items.map({ key, value in value[FileAttributeKey.size]! as! Double })
 
         let treeMap = YMTreeMap(withValues: values)
-        let treeMapRects: [NSRect] = treeMap.tessellate(inRect: self.getTreeMapBounds(outerRect: dirtyRect))
+        let treeMapRects: [NSRect] = treeMap.tessellate(inRect: rectBelowTextField)
 
         var tiles: [ItemView] = []
 

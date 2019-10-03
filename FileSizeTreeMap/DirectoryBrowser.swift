@@ -13,20 +13,23 @@ class DirectoryBrowser {
         do {
             return try FileManager.default.attributesOfItem(atPath: pathToItem)
         } catch {
-            print("Boom \(error)")
+            print("Error reading attributes of item \(pathToItem): \(error)")
             return [:]
         }
     }
 
-    func getItems(pathToBrowse aPath: String) -> [String : [FileAttributeKey : Any]] {
+    func getItems(pathToBrowse aPath: String) -> (Bool, [String : [FileAttributeKey : Any]]) {
         do {
             let contents: [String] = try FileManager.default.contentsOfDirectory(atPath: aPath)
-            return contents.reduce(into: [String: [FileAttributeKey : Any]]()) {
-                $0[$1] = getItem(pathToItem: "\(aPath)/\($1)")
-            }
+            return (
+                true,
+                contents.reduce(into: [String: [FileAttributeKey : Any]]()) {
+                    $0[$1] = getItem(pathToItem: "\(aPath)/\($1)")
+                }
+            )
         } catch {
-            print("Boom \(error)")
-            return [:]
+            print("Error reading files at path \(aPath) \(error)")
+            return (false, [:])
         }
     }
 
