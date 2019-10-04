@@ -39,8 +39,6 @@ class TreeMapView: NSView {
                 if (self.directoryBrowser.isDirectory(pathToCheck: newPath)) {
                     self.updateCurrentPath(newPath: "\(self.currentPath)/\(clickedTile!.name)")
                 }
-            } else {
-                print("I don't know where that click went")
             }
         }
     }
@@ -72,6 +70,7 @@ class TreeMapView: NSView {
         let rectBelowTextField = self.getRectBelowTextField(outerRect: dirtyRect)
 
         if (!ok) {
+            self.tiles = []
             let errorMessage = ErrorMessageView()
             errorMessage.draw(rectBelowTextField)
             return
