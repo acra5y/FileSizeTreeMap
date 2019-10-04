@@ -19,10 +19,26 @@ class ItemView: NSView {
                        alpha: 1)
     }
 
+    private func getLabel() -> String {
+        let type = self.file[.type]
+
+        if (type == nil || type! as! FileAttributeType == .typeDirectory) {
+            return self.name
+        }
+
+        let byteCountFormatter = ByteCountFormatter()
+        byteCountFormatter.countStyle = .file
+        let bytes = self.file[.size]! as! Int64
+        return "\(self.name) \(byteCountFormatter.string(fromByteCount: bytes))"
+    }
+
     override func draw(_ dirtyRect: NSRect) {
         randomColor.setFill()
         dirtyRect.fill()
-        let label: NSAttributedString =  NSAttributedString(string: self.name, attributes: [.foregroundColor: NSColor.white, .strokeColor: NSColor.black, .strokeWidth:  -3.0])
+        let label: NSAttributedString =  NSAttributedString(
+            string: self.getLabel(),
+            attributes: [.foregroundColor: NSColor.white, .strokeColor: NSColor.black, .strokeWidth:  -3.0]
+        )
         label.draw(in: dirtyRect)
     }
 }
