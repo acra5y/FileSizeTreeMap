@@ -18,8 +18,23 @@ class DirectoryBrowser {
         }
     }
 
-    func getItems(pathToBrowse aPath: String) -> (Bool, [String : [FileAttributeKey : Any]]) {
-        if (!self.isDirectory(pathToCheck:  aPath)) {
+    private func getItemSize(pathToItem: String) -> Int? {
+        let item = self.getItem(pathToItem: pathToItem)
+
+        if (item[.type] == nil || item[.type]! as! FileAttributeType != .typeDirectory) {
+            return item[.size] as? Int
+        }
+
+        var folderSize = 0
+        (FileManager.default.enumerator(at: NSURL(fileURLWithPath: pathToItem) as URL, includingPropertiesForKeys: nil)?.allObjects as? [URL])?.lazy.forEach {
+            folderSize += (try? $0.resourceValues(forKeys: [.totalFileAllocatedSizeKey]))?.totalFileAllocatedSize ?? 0
+        }
+
+        return folderSize
+    }
+
+    func getItems(pathToBrowse aPath: String) -> (Bool, [String : Int]) {
+        if (!self.isDirectory(pathToCheck: aPath)) {
             print("given path \(aPath) is not a directory.")
             return (false, [:])
         }
@@ -28,8 +43,8 @@ class DirectoryBrowser {
             let contents: [String] = try FileManager.default.contentsOfDirectory(atPath: aPath)
             return (
                 true,
-                contents.reduce(into: [String: [FileAttributeKey : Any]]()) {
-                    $0[$1] = getItem(pathToItem: "\(aPath)/\($1)")
+                contents.reduce(into: [String: Int]()) {
+                    $0[$1] = getItemSize(pathToItem: "\(aPath)/\($1)")
                 }
             )
         } catch {

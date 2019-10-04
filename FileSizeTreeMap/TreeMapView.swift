@@ -43,9 +43,9 @@ class TreeMapView: NSView {
         }
     }
 
-    private func drawItems(bounds: NSRect, items: [String : [FileAttributeKey : Any]]) {
+    private func drawItems(bounds: NSRect, items: [String : Int]) {
         let names = items.map({ key, _ in key })
-        let values = items.map({ key, value in value[FileAttributeKey.size]! as! Double })
+        let values = items.map({ _, value in value })
 
         let treeMap = YMTreeMap(withValues: values)
         let treeMapRects: [NSRect] = treeMap.tessellate(inRect: bounds)
@@ -56,7 +56,7 @@ class TreeMapView: NSView {
             let item = ItemView(frame: treeMapRect)
             let itemName = names[index]
             item.name = itemName
-            item.file = items[itemName]!
+            item.size = items[itemName]!
             item.draw(treeMapRect)
             tiles.append(item)
             self.tiles = tiles
@@ -78,7 +78,7 @@ class TreeMapView: NSView {
 
         self.drawItems(
             bounds: rectBelowTextField,
-            items: items.filter({ _, value in return value[FileAttributeKey.size] != nil && value[FileAttributeKey.size]! as! Double > 0 })
+            items: items.filter({ key, value in return value != nil && value! > 0 })
         )
     }
 }
