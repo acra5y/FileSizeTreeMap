@@ -16,6 +16,7 @@ class TreeMapView: NSView {
     private var tiles: [ItemView] = []
     lazy private var currentPath: String = NSSearchPathForDirectoriesInDomains(.picturesDirectory, .userDomainMask, true).first!
     lazy private var directoryBrowser: DirectoryBrowser = DirectoryBrowser()
+    lazy private var state: (ok: Bool, items: [String : Int]) = self.directoryBrowser.getItems(pathToBrowse: self.currentPath)
 
     private func getRectBelowTextField(outerRect: NSRect) -> NSRect {
         return NSMakeRect(outerRect.minX, outerRect.minY - self.currentPathTextfield.bounds.minY, outerRect.width, outerRect.height - self.currentPathTextfield.bounds.height)
@@ -23,6 +24,7 @@ class TreeMapView: NSView {
 
     private func updateCurrentPath(newPath: String) {
         self.currentPath = newPath
+        self.state = self.directoryBrowser.getItems(pathToBrowse: self.currentPath)
         self.setNeedsDisplay(self.bounds)
     }
 
@@ -66,10 +68,9 @@ class TreeMapView: NSView {
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
         self.currentPathTextfield.stringValue = self.currentPath
-        let (ok, items) = self.directoryBrowser.getItems(pathToBrowse: self.currentPath)
         let rectBelowTextField = self.getRectBelowTextField(outerRect: dirtyRect)
 
-        if (!ok) {
+        if (!self.state.ok) {
             self.tiles = []
             let errorMessage = ErrorMessageView()
             errorMessage.draw(rectBelowTextField)
@@ -78,7 +79,7 @@ class TreeMapView: NSView {
 
         self.drawItems(
             bounds: rectBelowTextField,
-            items: items.filter({ key, value in return value != nil && value! > 0 })
+            items: self.state.items.filter({ key, value in return value != nil && value! > 0 })
         )
     }
 }
