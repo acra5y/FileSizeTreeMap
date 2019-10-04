@@ -40,6 +40,10 @@ class TreeMapView: NSView {
                 let newPath = "\(self.currentPath)/\(clickedTile!.name)"
                 if (self.directoryBrowser.isDirectory(pathToCheck: newPath)) {
                     self.updateCurrentPath(newPath: "\(self.currentPath)/\(clickedTile!.name)")
+                } else {
+                    let pasteboard = NSPasteboard.general
+                    pasteboard.clearContents()
+                    pasteboard.setString(clickedTile!.name, forType: .string)
                 }
             }
         }
