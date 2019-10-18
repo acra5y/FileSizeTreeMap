@@ -12,6 +12,17 @@ class ItemView: NSView {
     lazy var name: String = ""
     lazy var size: Int = 0
 
+    required init?(coder decoder: NSCoder) {
+       super.init(coder: decoder)
+    }
+
+    init(frame frameRect: NSRect, name: String, size: Int) {
+        super.init(frame: frameRect)
+
+        self.name = name
+        self.size = size
+    }
+
     var randomColor: NSColor {
         return NSColor(red: CGFloat(arc4random_uniform(255) % 255) / 255.0,
                        green: CGFloat(arc4random_uniform(255) % 255) / 255.0,
@@ -26,6 +37,8 @@ class ItemView: NSView {
     }
 
     override func draw(_ dirtyRect: NSRect) {
+        super.draw(dirtyRect)
+
         randomColor.setFill()
         dirtyRect.fill()
         let label: NSAttributedString =  NSAttributedString(

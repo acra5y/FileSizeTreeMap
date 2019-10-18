@@ -59,10 +59,8 @@ class TreeMapView: NSView {
         var tiles: [ItemView] = []
 
         for (index, treeMapRect) in treeMapRects.enumerated() {
-            let item = ItemView(frame: treeMapRect)
             let itemName = names[index]
-            item.name = itemName
-            item.size = items[itemName]!
+            let item = ItemView(frame: treeMapRect, name: itemName, size: items[itemName]!)
             item.draw(treeMapRect)
             tiles.append(item)
             self.tiles = tiles
