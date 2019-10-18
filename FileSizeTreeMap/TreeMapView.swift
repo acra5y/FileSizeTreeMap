@@ -23,7 +23,9 @@ class TreeMapView: NSView {
     }
 
     private func updateCurrentPath(newPath: String) {
-        self.currentPath = newPath
+        if (newPath.count > 0) {
+            self.currentPath = newPath
+        }
         self.state = self.directoryBrowser.getItems(pathToBrowse: self.currentPath)
         self.updateView()
     }
