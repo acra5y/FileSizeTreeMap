@@ -25,7 +25,7 @@ class TreeMapView: NSView {
     private func updateCurrentPath(newPath: String) {
         self.currentPath = newPath
         self.state = self.directoryBrowser.getItems(pathToBrowse: self.currentPath)
-        self.setNeedsDisplay(self.bounds)
+        self.updateView()
     }
 
     @IBAction func textFieldEdited(_ sender: NSTextField) {
@@ -61,22 +61,25 @@ class TreeMapView: NSView {
         for (index, treeMapRect) in treeMapRects.enumerated() {
             let itemName = names[index]
             let item = ItemView(frame: treeMapRect, name: itemName, size: items[itemName]!)
-            item.draw(treeMapRect)
+            self.addSubview(item, positioned: .below, relativeTo: index == 0 ? self.currentPathTextfield : tiles[index - 1])
             tiles.append(item)
         }
         self.tiles = tiles
     }
 
-    override func draw(_ dirtyRect: NSRect) {
-        super.draw(dirtyRect)
+    private func updateView() {
         self.currentPathTextfield.stringValue = self.currentPath
-        let rectBelowTextField = self.getRectBelowTextField(outerRect: dirtyRect)
+        let rectBelowTextField = self.getRectBelowTextField(outerRect: self.bounds)
 
         if (!self.state.ok) {
             self.tiles = []
-            let errorMessage = ErrorMessageView()
-            errorMessage.draw(rectBelowTextField)
+            let errorMessage = ErrorMessageView(frame: rectBelowTextField)
+            self.addSubview(errorMessage)
             return
+        }
+
+        for view in self.window!.contentView!.subviews where view is ItemView || view is ErrorMessageView {
+            view.removeFromSuperviewWithoutNeedingDisplay()
         }
 
         self.drawItems(
