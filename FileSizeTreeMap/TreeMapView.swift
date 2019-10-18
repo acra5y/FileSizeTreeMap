@@ -63,8 +63,8 @@ class TreeMapView: NSView {
             let item = ItemView(frame: treeMapRect, name: itemName, size: items[itemName]!)
             item.draw(treeMapRect)
             tiles.append(item)
-            self.tiles = tiles
         }
+        self.tiles = tiles
     }
 
     override func draw(_ dirtyRect: NSRect) {
