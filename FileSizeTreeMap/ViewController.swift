@@ -12,10 +12,11 @@ import YMTreeMap
 
 class ViewController: NSViewController {
 
+    @IBOutlet var treeMapView: TreeMapView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        treeMapView = TreeMapView(frame: .zero)
+        self.view.addSubview(treeMapView)
     }
 
     override var representedObject: Any? {
