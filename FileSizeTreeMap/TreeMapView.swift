@@ -7,86 +7,48 @@
 //
 
 import Cocoa
-import YMTreeMap
 
 class TreeMapView: NSView {
 
     @IBOutlet weak var currentPathTextfield: NSTextField!
+    @IBOutlet weak var treeMapItemsView: TreeMapItemsView!
 
-    private var tiles: [ItemView] = []
     lazy private var currentPath: String = NSSearchPathForDirectoriesInDomains(.picturesDirectory, .userDomainMask, true).first!
     lazy private var directoryBrowser: DirectoryBrowser = DirectoryBrowser()
-    lazy private var state: (ok: Bool, items: [String : Int]) = self.directoryBrowser.getItems(pathToBrowse: self.currentPath)
-
-    private func getRectBelowTextField(outerRect: NSRect) -> NSRect {
-        return NSMakeRect(outerRect.minX, outerRect.minY - self.currentPathTextfield.bounds.minY, outerRect.width, outerRect.height - self.currentPathTextfield.bounds.height)
-    }
-
-    private func updateCurrentPath(newPath: String) {
-        if (newPath.count > 0) {
-            self.currentPath = newPath
-        }
-        self.state = self.directoryBrowser.getItems(pathToBrowse: self.currentPath)
-        self.updateView()
-    }
-
-    @IBAction func textFieldEdited(_ sender: NSTextField) {
-        self.updateCurrentPath(newPath: sender.stringValue)
-    }
 
     override func mouseUp(with event: NSEvent) {
         if (event.clickCount == 1) {
-            let clickedTile = self.tiles.first(where:{ $0.frame.contains(event.locationInWindow) })
+            let container = self.window!.contentView!.subviews.first(where:{ $0.frame.contains(event.locationInWindow) })
 
-            if (clickedTile != nil) {
-                let newPath = "\(self.currentPath)/\(clickedTile!.name)"
-                if (self.directoryBrowser.isDirectory(pathToCheck: newPath)) {
-                    self.updateCurrentPath(newPath: "\(self.currentPath)/\(clickedTile!.name)")
-                } else {
-                    let pasteboard = NSPasteboard.general
-                    pasteboard.clearContents()
-                    pasteboard.setString(clickedTile!.name, forType: .string)
+            if (container != nil && container is TreeMapItemsView) {
+                let clickedTile = container!.subviews.first(where:{ $0.frame.contains(event.locationInWindow) })
+
+                if (clickedTile != nil && clickedTile is ItemView) {
+                    let itemName = (clickedTile! as! ItemView).name
+
+                    let newPath = "\(self.currentPath)/\(itemName)"
+                    if (self.directoryBrowser.isDirectory(pathToCheck: newPath)) {
+                        self.updateCurrentPath(newPath: "\(self.currentPath)/\(itemName)")
+                    } else {
+                        let pasteboard = NSPasteboard.general
+                        pasteboard.clearContents()
+                        pasteboard.setString(itemName, forType: .string)
+                    }
                 }
             }
         }
     }
 
-    private func drawItems(bounds: NSRect, items: [String : Int]) {
-        let names = items.map({ key, _ in key })
-        let values = items.map({ _, value in value })
-
-        let treeMap = YMTreeMap(withValues: values)
-        let treeMapRects: [NSRect] = treeMap.tessellate(inRect: bounds)
-
-        var tiles: [ItemView] = []
-
-        for (index, treeMapRect) in treeMapRects.enumerated() {
-            let itemName = names[index]
-            let item = ItemView(frame: treeMapRect, name: itemName, size: items[itemName]!)
-            self.addSubview(item, positioned: .below, relativeTo: index == 0 ? self.currentPathTextfield : tiles[index - 1])
-            tiles.append(item)
+    public func updateCurrentPath(newPath: String) {
+        if (newPath.count > 0) {
+            self.currentPath = newPath
         }
-        self.tiles = tiles
+        self.currentPathTextfield.stringValue = self.currentPath
+        self.treeMapItemsView.state = self.directoryBrowser.getItems(pathToBrowse: self.currentPath)
+        self.treeMapItemsView.updateView()
     }
 
-    private func updateView() {
-        self.currentPathTextfield.stringValue = self.currentPath
-        let rectBelowTextField = self.getRectBelowTextField(outerRect: self.bounds)
-
-        if (!self.state.ok) {
-            self.tiles = []
-            let errorMessage = ErrorMessageView(frame: rectBelowTextField)
-            self.addSubview(errorMessage)
-            return
-        }
-
-        for view in self.window!.contentView!.subviews where view is ItemView || view is ErrorMessageView {
-            view.removeFromSuperviewWithoutNeedingDisplay()
-        }
-
-        self.drawItems(
-            bounds: rectBelowTextField,
-            items: self.state.items.filter({ key, value in return value != nil && value! > 0 })
-        )
+    @IBAction func textFieldEdited(_ sender: NSTextField) {
+        self.updateCurrentPath(newPath: sender.stringValue)
     }
 }

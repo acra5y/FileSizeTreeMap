@@ -47,4 +47,8 @@ class ItemView: NSView {
         )
         label.draw(in: dirtyRect)
     }
+
+    override func hitTest(_ point: NSPoint) -> NSView? {
+        return nil // let click bubble up to parent view
+    }
 }

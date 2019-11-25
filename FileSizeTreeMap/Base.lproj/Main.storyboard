@@ -720,14 +720,22 @@
                                     <action selector="textFieldEdited:" target="lAS-eA-dzL" id="3fQ-NY-jDj"/>
                                 </connections>
                             </textField>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="UyD-Af-WCX" customClass="TreeMapItemsView" customModule="FileSizeTreeMap" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="465" height="278"/>
+                            </customView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="sCQ-Vw-i0t" firstAttribute="top" secondItem="lAS-eA-dzL" secondAttribute="top" id="7OE-RC-mtB"/>
                             <constraint firstAttribute="trailing" secondItem="sCQ-Vw-i0t" secondAttribute="trailing" id="bXT-CS-rL6"/>
+                            <constraint firstAttribute="bottom" secondItem="UyD-Af-WCX" secondAttribute="bottom" id="fLo-3y-4bl"/>
                             <constraint firstItem="sCQ-Vw-i0t" firstAttribute="leading" secondItem="lAS-eA-dzL" secondAttribute="leading" id="l6b-7S-eN0"/>
+                            <constraint firstItem="UyD-Af-WCX" firstAttribute="leading" secondItem="lAS-eA-dzL" secondAttribute="leading" id="nAY-tS-sAI"/>
+                            <constraint firstAttribute="trailing" secondItem="UyD-Af-WCX" secondAttribute="trailing" id="vcq-C9-Gbf"/>
+                            <constraint firstItem="UyD-Af-WCX" firstAttribute="top" secondItem="sCQ-Vw-i0t" secondAttribute="bottom" id="z5U-O0-KSJ"/>
                         </constraints>
                         <connections>
                             <outlet property="currentPathTextfield" destination="sCQ-Vw-i0t" id="6Vo-sz-xz5"/>
+                            <outlet property="treeMapItemsView" destination="UyD-Af-WCX" id="cgF-cK-sRE"/>
                         </connections>
                     </customView>
                 </viewController>

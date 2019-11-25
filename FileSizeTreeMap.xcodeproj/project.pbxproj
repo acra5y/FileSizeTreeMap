@@ -10,6 +10,7 @@
 		4013227F23468751008942D1 /* ErrorMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4013227E23468751008942D1 /* ErrorMessageView.swift */; };
 		40A51A12233AA17B0065A4CA /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A51A11233AA17B0065A4CA /* ItemView.swift */; };
 		40A51A15233AB1350065A4CA /* DirectoryBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A51A14233AB1350065A4CA /* DirectoryBrowser.swift */; };
+		40B2B293235C9C7C00B86519 /* TreeMapItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B2B292235C9C7C00B86519 /* TreeMapItemsView.swift */; };
 		40BE90A323219AF2001B6E95 /* TreeMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BE90A223219AF2001B6E95 /* TreeMapView.swift */; };
 		40E5CA0E231C29180058B84F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E5CA0D231C29180058B84F /* AppDelegate.swift */; };
 		40E5CA10231C29180058B84F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E5CA0F231C29180058B84F /* ViewController.swift */; };
@@ -36,6 +37,7 @@
 		4013227E23468751008942D1 /* ErrorMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessageView.swift; sourceTree = "<group>"; };
 		40A51A11233AA17B0065A4CA /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
 		40A51A14233AB1350065A4CA /* DirectoryBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryBrowser.swift; sourceTree = "<group>"; };
+		40B2B292235C9C7C00B86519 /* TreeMapItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeMapItemsView.swift; sourceTree = "<group>"; };
 		40BE90A223219AF2001B6E95 /* TreeMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeMapView.swift; sourceTree = "<group>"; };
 		40E5CA0A231C29180058B84F /* FileSizeTreeMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FileSizeTreeMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40E5CA0D231C29180058B84F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				40A51A11233AA17B0065A4CA /* ItemView.swift */,
 				40A51A14233AB1350065A4CA /* DirectoryBrowser.swift */,
 				4013227E23468751008942D1 /* ErrorMessageView.swift */,
+				40B2B292235C9C7C00B86519 /* TreeMapItemsView.swift */,
 			);
 			path = FileSizeTreeMap;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40B2B293235C9C7C00B86519 /* TreeMapItemsView.swift in Sources */,
 				40E5CA10231C29180058B84F /* ViewController.swift in Sources */,
 				40A51A15233AB1350065A4CA /* DirectoryBrowser.swift in Sources */,
 				40E5CA0E231C29180058B84F /* AppDelegate.swift in Sources */,
