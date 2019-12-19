@@ -49,7 +49,7 @@ class ItemView: NSView {
         dirtyRect.fill()
         let label: NSAttributedString =  NSAttributedString(
             string: self.getLabel(),
-            attributes: [.foregroundColor: NSColor.white, .strokeColor: NSColor.black, .strokeWidth:  -3.0]
+            attributes: [.strokeColor: NSColor.white, .strokeWidth:  -1.5, .font: NSFont.systemFont(ofSize: 14)]
         )
         label.draw(in: dirtyRect)
     }
