@@ -17,6 +17,7 @@
 		40E5CA12231C29190058B84F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40E5CA11231C29190058B84F /* Assets.xcassets */; };
 		40E5CA15231C29190058B84F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40E5CA13231C29190058B84F /* Main.storyboard */; };
 		40E5CA21231C29190058B84F /* FileSizeTreeMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E5CA20231C29190058B84F /* FileSizeTreeMapTests.swift */; };
+		40F5F88A238C7CAA008938E0 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F5F889238C7CAA008938E0 /* Item.swift */; };
 		A1152008550F35BF451720D6 /* Pods_FileSizeTreeMapTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B5326B2260502C9D8A5A560 /* Pods_FileSizeTreeMapTests.framework */; };
 		AA877A0179AAD3DA1986C94D /* Pods_FileSizeTreeMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57E8B7FE99130A0BE2769C03 /* Pods_FileSizeTreeMap.framework */; };
 /* End PBXBuildFile section */
@@ -51,6 +52,7 @@
 		40E5CA22231C29190058B84F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40E5CA2B231C3C0E0058B84F /* FileSizeTreeMap.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = FileSizeTreeMap.xcworkspace; sourceTree = "<group>"; };
 		40E5CA2D231C3C4F0058B84F /* FileSizeTreeMap.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = FileSizeTreeMap.xcodeproj; sourceTree = "<group>"; };
+		40F5F889238C7CAA008938E0 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		47B36210F5B5BF2DB2C4B721 /* Pods-FileSizeTreeMapTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FileSizeTreeMapTests.release.xcconfig"; path = "Target Support Files/Pods-FileSizeTreeMapTests/Pods-FileSizeTreeMapTests.release.xcconfig"; sourceTree = "<group>"; };
 		57E8B7FE99130A0BE2769C03 /* Pods_FileSizeTreeMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FileSizeTreeMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4A7841C74F28C0144ED29D8 /* Pods-FileSizeTreeMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FileSizeTreeMap.debug.xcconfig"; path = "Target Support Files/Pods-FileSizeTreeMap/Pods-FileSizeTreeMap.debug.xcconfig"; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				40A51A14233AB1350065A4CA /* DirectoryBrowser.swift */,
 				4013227E23468751008942D1 /* ErrorMessageView.swift */,
 				40B2B292235C9C7C00B86519 /* TreeMapItemsView.swift */,
+				40F5F889238C7CAA008938E0 /* Item.swift */,
 			);
 			path = FileSizeTreeMap;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				40E5CA10231C29180058B84F /* ViewController.swift in Sources */,
 				40A51A15233AB1350065A4CA /* DirectoryBrowser.swift in Sources */,
 				40E5CA0E231C29180058B84F /* AppDelegate.swift in Sources */,
+				40F5F88A238C7CAA008938E0 /* Item.swift in Sources */,
 				4013227F23468751008942D1 /* ErrorMessageView.swift in Sources */,
 				40BE90A323219AF2001B6E95 /* TreeMapView.swift in Sources */,
 				40A51A12233AA17B0065A4CA /* ItemView.swift in Sources */,

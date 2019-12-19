@@ -10,17 +10,17 @@ import Cocoa
 
 class ItemView: NSView {
     lazy var name: String = ""
-    lazy var size: Int = 0
+    lazy var item: Item = Item(size: 0, isDirectory: false)
 
     required init?(coder decoder: NSCoder) {
        super.init(coder: decoder)
     }
 
-    init(frame frameRect: NSRect, name: String, size: Int) {
+    init(frame frameRect: NSRect, name: String, item: Item) {
         super.init(frame: frameRect)
 
         self.name = name
-        self.size = size
+        self.item = item
     }
 
     var randomColor: NSColor {
@@ -33,7 +33,7 @@ class ItemView: NSView {
     private func getLabel() -> String {
         let byteCountFormatter = ByteCountFormatter()
         byteCountFormatter.countStyle = .file
-        return "\(self.name) \(byteCountFormatter.string(fromByteCount: Int64(self.size)))"
+        return "\(self.name) \(byteCountFormatter.string(fromByteCount: Int64(self.item.size!)))"
     }
 
     override func draw(_ dirtyRect: NSRect) {

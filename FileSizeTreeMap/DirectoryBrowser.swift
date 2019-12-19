@@ -33,7 +33,7 @@ class DirectoryBrowser {
         return folderSize
     }
 
-    func getItems(pathToBrowse aPath: String) -> (Bool, [String : Int]) {
+    func getItems(pathToBrowse aPath: String) -> (Bool, [String : Item]) {
         if (!self.isDirectory(pathToCheck: aPath)) {
             print("given path \(aPath) is not a directory.")
             return (false, [:])
@@ -43,8 +43,9 @@ class DirectoryBrowser {
             let contents: [String] = try FileManager.default.contentsOfDirectory(atPath: aPath)
             return (
                 true,
-                contents.reduce(into: [String: Int]()) {
-                    $0[$1] = getItemSize(pathToItem: "\(aPath)/\($1)")
+                contents.reduce(into: [String: Item]()) {
+                    let pathToItem = "\(aPath)/\($1)"
+                    $0[$1] = Item(size: getItemSize(pathToItem: pathToItem), isDirectory: self.isDirectory(pathToCheck: pathToItem))
                 }
             )
         } catch {
