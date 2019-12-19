@@ -24,7 +24,6 @@ class TreeMapItemsView: NSView {
     }
 
     private func drawItems() {
-        // TODO: Make sure to filter 0 items from names as well
         let names = self.state.items.map({ key, _ in key })
         let values = self.state.items.map({ _, value in value.size }).compactMap{ $0 }
         

@@ -46,6 +46,8 @@ class DirectoryBrowser {
                 contents.reduce(into: [String: Item]()) {
                     let pathToItem = "\(aPath)/\($1)"
                     $0[$1] = Item(size: getItemSize(pathToItem: pathToItem), isDirectory: self.isDirectory(pathToCheck: pathToItem))
+                    }.filter {
+                        $0.value.size != nil && $0.value.size! > 0
                 }
             )
         } catch {
