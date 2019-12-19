@@ -42,15 +42,15 @@ class TreeMapItemsView: NSView {
     }
     
     public func updateView() {
+        for view in self.subviews where view is ItemView || view is ErrorMessageView {
+            view.removeFromSuperviewWithoutNeedingDisplay()
+        }
+
         if (!self.state.ok) {
             self.tiles = []
             let errorMessage = ErrorMessageView(frame: self.bounds)
             self.addSubview(errorMessage)
             return
-        }
-        
-        for view in self.subviews where view is ItemView || view is ErrorMessageView {
-            view.removeFromSuperviewWithoutNeedingDisplay()
         }
         
         self.drawItems()
