@@ -24,9 +24,15 @@ class ItemView: NSView {
     }
 
     var randomColor: NSColor {
-        return NSColor(red: CGFloat(arc4random_uniform(255) % 255) / 255.0,
-                       green: CGFloat(arc4random_uniform(255) % 255) / 255.0,
-                       blue: CGFloat(arc4random_uniform(255) % 255) / 255.0,
+        let red: CGFloat = ( (CGFloat)(arc4random_uniform(256)) ) / 256;
+        let green: CGFloat = ( (CGFloat)(arc4random_uniform(256)) ) / 256;
+        let blue: CGFloat = ( (CGFloat)(arc4random_uniform(256)) ) / 256;
+
+        let mixRed: CGFloat = 1+0xad/256, mixGreen: CGFloat = 1+0xd8/256, mixBlue: CGFloat = 1+0xe6/256;
+
+        return NSColor(red: (red + mixRed) / 3,
+                       green: (green + mixGreen) / 3,
+                       blue: (blue + mixBlue) / 3,
                        alpha: 1)
     }
 
