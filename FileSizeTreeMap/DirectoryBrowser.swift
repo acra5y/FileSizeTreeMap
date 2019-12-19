@@ -26,7 +26,7 @@ class DirectoryBrowser {
         }
 
         var folderSize = 0
-        (FileManager.default.enumerator(at: NSURL(fileURLWithPath: pathToItem) as URL, includingPropertiesForKeys: nil)?.allObjects as? [URL])?.lazy.forEach {
+        (FileManager.default.enumerator(at: NSURL(fileURLWithPath: pathToItem) as URL, includingPropertiesForKeys: [.totalFileAllocatedSizeKey])?.allObjects as? [URL])?.lazy.forEach {
             folderSize += (try? $0.resourceValues(forKeys: [.totalFileAllocatedSizeKey]))?.totalFileAllocatedSize ?? 0
         }
 
